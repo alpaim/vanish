@@ -24,7 +24,6 @@ export const subscribeToHandshake = async (code: string) => {
             };
 
         }, cancel() {
-            console.log("CLEANUP");
             cleanup?.();
         },
     });

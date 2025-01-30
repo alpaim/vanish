@@ -69,7 +69,6 @@ export const HandshakeWorker = (): null => {
         subscription();
 
         return () => {
-            console.log("cleaning");
             isActive = false;
 
             if (reader) {

@@ -4,7 +4,6 @@ export const generateSharedSecret = async (
     privateKeyRaw: ArrayBuffer,
     otherPublicKeyRaw: ArrayBuffer,
 ): Promise<ArrayBuffer> => {
-    console.log(privateKeyRaw);
     const privateKey = Buffer.from(privateKeyRaw);
     const otherPublicKey = Buffer.from(otherPublicKeyRaw);
     const privateKeyObj = await window.crypto.subtle.importKey(

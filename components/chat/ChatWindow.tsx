@@ -74,7 +74,6 @@ export function ChatWindow({ initialKey }: ChatWindowProps) {
     };
 
     useEffect(() => {
-        console.count("Messages stream update");
         setOptimisticMessages([]);
     }, [messages]);
 

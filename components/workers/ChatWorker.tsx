@@ -98,7 +98,6 @@ export const ChatWorker = ({ initialKey }: ChatWorkerProps): null => {
         subscription().then();
 
         return () => {
-            console.log("cleaning");
             isActive = false;
 
             if (reader) {

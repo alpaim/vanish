@@ -21,8 +21,6 @@ export const CryptoWorker = (): null => {
 
             if (!kp) {return;}
 
-            console.log("keypair", kp);
-
             setKeypair(kp);
         };
 
