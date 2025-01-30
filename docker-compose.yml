@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  vanish:
+    container_name: vanish
+    build: .
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_MAX_RETRIES=${REDIS_MAX_RETRIES}
+      - NODE_ENV=production
+    networks:
+      - vanishLocal
+      - vanishPublic
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    container_name: vanish_redis
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    networks:
+      - vanishLocal
+
+networks:
+  vanishLocal:
+    name: vanishLocal
+  vanishPublic:
+    name: vanishPublic
