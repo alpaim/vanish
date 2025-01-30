@@ -3,7 +3,10 @@ version: '3.8'
 services:
   vanish:
     container_name: vanish
-    build: .
+    image: ghcr.io/alpaim/vanish:latest
+#    build: .
+    ports:
+      - "3000:3000"
     environment:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
