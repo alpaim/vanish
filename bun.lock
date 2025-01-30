@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "burn-after-reading",
+      "name": "vanish",
       "dependencies": {
         "ioredis": "^5.4.2",
         "lucide-react": "^0.474.0",
