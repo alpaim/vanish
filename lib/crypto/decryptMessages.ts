@@ -4,7 +4,7 @@ import { importKey } from "@/lib/crypto/importKeyFromBase64";
 import { generateSharedSecret } from "@/lib/crypto/generateSharedSecret";
 import { decryptMessage } from "@/lib/crypto/decryptMessage";
 
-export const decryptMessages = async (messages: Message[], keypair: Keypair, theirPublicAddress: string): Promise<Message[]> => {
+export const decryptMessages = async (messages: Message[], keypair: Keypair, theirPublicAddress: string, keepDataEncrypted: boolean): Promise<Message[]> => {
     if (keypair === undefined) { return []; }
 
     if (theirPublicAddress === "") { return []; }
@@ -20,11 +20,13 @@ export const decryptMessages = async (messages: Message[], keypair: Keypair, the
 
         const decryptedMessage = await decryptMessage(encryptedMessage, sharedSecret);
 
+        const data = keepDataEncrypted ? atob(encryptedMessage.encryptedData) : decryptedMessage;
+
         return {
             ...m,
             body: {
                 ...m.body,
-                data: decryptedMessage,
+                data,
             },
         };
     }));

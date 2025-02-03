@@ -22,6 +22,8 @@ export function ChatWindow({ initialKey }: ChatWindowProps) {
     const encryptedMessages = useChatStore(state => state.messages);
     const addEncryptedMessages = useChatStore(state => state.addMessages);
 
+    const isShowEncrypted = useUserSettings(state => state.isShowEncrypted);
+
     const [messages, setMessages] = useState<Message[]>([]);
     const [optimisticMessages, setOptimisticMessages] = useState<Message[]>([]);
 
@@ -86,12 +88,12 @@ export function ChatWindow({ initialKey }: ChatWindowProps) {
             return;
         }
 
-        decryptMessages(encryptedMessages, keypair, initialKey).then((m) => {
+        decryptMessages(encryptedMessages, keypair, initialKey, isShowEncrypted).then((m) => {
             const sortedMessages = sortMessagesByDate(m);
 
             setMessages(sortedMessages);
         });
-    }, [keypair, encryptedMessages]);
+    }, [keypair, isShowEncrypted, encryptedMessages]);
 
     return (
         <div className="grid grid-rows-[1fr_auto] h-full">
@@ -99,7 +101,7 @@ export function ChatWindow({ initialKey }: ChatWindowProps) {
                 {[...messages, ...optimisticMessages].reverse().map((msg, index) => (
                     <div key={index} className={`flex ${msg.from === keypair?.publicKey ? "justify-end" : "justify-start"}`}>
                         <div
-                            className={`max-w-xs px-4 py-2 rounded-lg ${msg.from === keypair?.publicKey ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                            className={`max-w-xs px-4 py-2 break-all rounded-lg ${msg.from === keypair?.publicKey ? "bg-blue-500 text-white" : "bg-gray-200"}`}
                         >
                             <p>{msg.body.data}</p>
                         </div>
