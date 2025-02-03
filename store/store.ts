@@ -30,7 +30,7 @@ export const useUserSettings = create<UserSettings>()(
             }),
         }),
         {
-            name: "bar-settings",
+            name: "vanish-settings",
             onRehydrateStorage: () => (state) => {
                 state?.setHydrated(true);
             },
