@@ -71,6 +71,8 @@ services:
   vanish:
     container_name: vanish
     image: ghcr.io/alpaim/vanish:latest
+    ports:
+      - "3000:3000"
     environment:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
